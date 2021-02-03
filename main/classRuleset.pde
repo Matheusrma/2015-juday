@@ -5,35 +5,19 @@ class Ruleset {
   Ruleset(int neighborsNum, int... stats) {
     generateCombinations(neighborsNum, stats);
   }
-   
-  void printValues () {
-    for (Rule c : combos) {
-      c.printValues();
-      println();
-    }
-  }
-   
-  void setRulset (int[] stats) {
-    for (Rule c : combos) {
-      c.setRandomDerivation(stats);
-    }
-  }
+  
+  Ruleset(String derivations, int size, int... stats){
+    generateCombinations(size, stats);
  
+    for (int i = 0; i < derivations.length(); ++i){
+      combos[i].setDerivation(Integer.valueOf(derivations.charAt(i)) - 48);  
+    }
+  }
+  
   void generateCombinations(int neighborsNum, int[] stats) {
     combos = new Rule[(int)pow(stats.length, neighborsNum)];
  
     iterateThroughStats(stats, combos, new int[] {}, 1, neighborsNum);
-    
-    combos[0].setDerivation(0);
-    combos[1].setDerivation(1);
-    combos[2].setDerivation(0);
-    combos[3].setDerivation(1);
-    combos[4].setDerivation(1);
-    combos[5].setDerivation(0);
-    combos[6].setDerivation(1);
-    combos[7].setDerivation(0);
-    
-    println();
   }
  
   void iterateThroughStats(int[] stats, Rule[] combos, int[] statCombination, int j, int neighborsNum) {
@@ -50,7 +34,6 @@ class Ruleset {
           if (combos[id] == null) {
             combos[id] = new Rule(tt);
             combos[id].setRandomDerivation(stats);
-            combos[id].printValues();
             found = true;
           }
           id++;
@@ -58,5 +41,17 @@ class Ruleset {
       }
     }
   }
+  
+  void printValues () {
+    for (Rule c : combos) {
+      c.printValues();
+      println();
+    }
+  }
+   
+  void setRuleset (int[] stats) {
+    for (Rule c : combos) {
+      c.setRandomDerivation(stats);
+    }
+  }
 }
-

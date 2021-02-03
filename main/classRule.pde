@@ -1,6 +1,6 @@
 class Rule {
   int[] statCombination; // e.g. [0] [0] [1]
-  int derivation = 0;    // if statCombination is found at a certain cell, it will become this derivation
+  int derivation = 0;    // if statCombination is found at a certain cell, it will become this derivation 
  
   Rule(int[] statCombination) {
     this.statCombination = statCombination;
@@ -39,4 +39,3 @@ class Rule {
     return matches;
   }
 }
-

@@ -19,14 +19,14 @@
  
 CellularAutomata ca;
 float scaleVal = 0.95;
-int drawMode = 0;
-boolean autoMode = true;
- 
+
+String base_word = "covid19";
+int[] dist = new int[] {1,0,0,0,1,0,1,0};  
+
 void setup () {
-  size (1200, 600);
+  size (1000, 1000);
  
-  ca = new CellularAutomata(120, 100, 1, new int [] {0, 1});
-  ca.updateFull();
+  ca = new CellularAutomata(100, 100, 3, new int [] {0, 1}, strToBinary(base_word));
  
   frameRate (30);
   colorMode (HSB, 360, 100, 100);
@@ -36,24 +36,33 @@ void setup () {
 void draw () {
   background(0, 0, 100);
   
-  translate((width -width * scaleVal) * 0.5, (height - height * scaleVal) * 0.5);
+  //add border
+  translate((width - width * scaleVal) * 0.5, (height - height * scaleVal) * 0.5);
   scale(scaleVal);
 
-  if (!autoMode) ca.update();
-  ca.draw(drawMode);
+  ca.draw();
 }
 
 void keyPressed() {
   if (key == 'h'){
-    ca = new CellularAutomata(120, 100, 1, new int [] {0, 1});
-    ca.updateFull();
-  }
-  else if (key == 'r'){
-    ca.newRuleset();
-    ca.updateFull();
-  }
-  else if (key == 'c'){
-    ca.setNewColors();
+    ca = new CellularAutomata(100, 100, 3, new int [] {0, 1}, strToBinary(base_word));
   }
 }
 
+String strToBinary(String base_word){
+  int sum = 0;
+  
+  for (int i = 0; i < base_word.length(); ++i){
+     sum += int(base_word.charAt(i));
+  }
+  
+  println(sum);
+  sum = sum % 255;
+  println(sum);
+  
+  String binary = binary(sum);
+  binary = binary.substring(binary.length() - 8);
+  
+  println(binary);
+  return binary;
+}

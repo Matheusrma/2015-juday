@@ -27,5 +27,11 @@ class Generation {
       cells[i].update(lib, cells, i);
     }
   }
+  
+  void print(){
+    for (int i = 0; i < cells.length; i++) {
+      cells[i].printValue();
+    }
+    println();
+  }
 }
-

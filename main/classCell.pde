@@ -9,10 +9,6 @@ class Cell {
     this.stat = stat;
   }
  
-  void printValue () {
-    print(stat + " ");
-  }
- 
   int[] getLeftIndexes (Cell[] c, int index, int num) {
     if (index < 0) {
       index = c.length-1;
@@ -76,8 +72,12 @@ class Cell {
  
       if (lib.combos[i].isCombo(checkCells)) {
         stat = lib.combos[i].derivation;
+        return;
       }
     }
   }
+  
+  void printValue () {
+    print(stat + " ");
+  }
 }
-
